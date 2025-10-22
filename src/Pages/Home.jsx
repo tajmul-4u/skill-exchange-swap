@@ -1,10 +1,11 @@
 import React from 'react';
+import TopRatedProviders from '../Components/TopRatedProvider/TopRatedProviders';
 
 const Home = () => {
     return (
-        <div>
-            <h1>home connect</h1>
-        </div>
+      <div>
+        
+      </div>
     );
 };
 
