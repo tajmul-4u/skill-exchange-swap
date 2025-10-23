@@ -31,12 +31,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/about"} className="hover:text-primary font-medium">
+            <Link to={"/auth/aboutus"} className="hover:text-primary font-medium">
               About
             </Link>
           </li>
           <li>
-            <Link to={"/profile"} className="hover:text-primary font-medium">
+            <Link to={"/auth/profile"} className="hover:text-primary font-medium">
               Profile
             </Link>
           </li>

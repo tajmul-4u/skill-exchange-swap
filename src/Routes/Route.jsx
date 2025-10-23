@@ -1,44 +1,60 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../Layouts/HomeLayout";
 import Home from "../Pages/Home";
-import CategorySkill from "../Pages/CategorySkill";
 import SkillCards from "../Components/SkillCards/SkillCards";
- 
+import SignUp from "../Pages/SignUp";
+import SignIn from "../Pages/SignIn";
+import AuthLayout from "../Layouts/AuthLayout";
+import AboutUs from "../Pages/AboutUs";
+import Profile from "../Pages/Profile";
+import CategoryBar from "../Components/CategoryBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: HomeLayout,
+    element: <HomeLayout />, // Navbar + Footer always shown
     children: [
+      { index: true, element: <Home /> },
       {
         index: true,
-        Component: Home, // renders at "/"
+        Component: CategoryBar,
       },
     ],
   },
   {
-    path: "/skillscards/:category",
+    path: "skillscards/:category",
     element: <SkillCards />,
     loader: ({ params }) =>
-      fetch("/skill.json").then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch skills");
-        return res.json().then((data) => {
-          const filteredSkills = data.filter(
-            (skill) => skill.category === decodeURIComponent(params.category)
-          );
-          console.log("Loader filtered skills:", filteredSkills); // Debug
-          return { skills: filteredSkills };
-        });
-      }),
-    errorElement: (
-      <p className="text-red-500">Error loading skills. Please try again.</p>
-    ),
+      fetch("/skill.json").then((res) =>
+        res.json().then((data) => ({
+          skills: data.filter((skill) => skill.category === params.category),
+        }))
+      ),
+  },
+  {
+    path: "/auth",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "/auth/signup",
+        Component: SignUp,
+      },
+      {
+        path: "/auth/signin",
+        Component: SignIn,
+      },
+      {
+        path: "/auth/aboutus",
+        Component: AboutUs,
+      },
+      {
+        path: "/auth/profile",
+        Component: Profile,
+      },
+    ],
   },
 
-  {
-    path: "*", // not /* when using Component API
-    Component: () => <p>Error 404</p>,
-  },
+  { path: "*", element: <p>404 Not Found</p> },
 ]);
 
 export default router;
