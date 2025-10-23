@@ -2,7 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router";
 
 const SkillCards = () => {
-  const { skills } = useLoaderData(); // ✅ Fixed
+  const { skills } = useLoaderData();  
 
   if (!skills || skills.length === 0) {
     return (
@@ -15,6 +15,7 @@ const SkillCards = () => {
   }
 
   return (
+    
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         {skills[0].category} Skills
@@ -52,6 +53,7 @@ const SkillCards = () => {
         ))}
       </div>
     </div>
+
   );
 };
 

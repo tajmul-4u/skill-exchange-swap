@@ -40,8 +40,7 @@ const CategoryBar = () => {
               key={index}
               onClick={() => navigate(`/skillscards/${cat}`)} // Navigate to dynamic route
               className={`px-4 py-2 rounded-full border transition-all duration-300 text-white ${
-                // Optional: Highlight active category using useLocation
-                window.location.pathname === `/skillscard/${cat}`
+                 window.location.pathname === `/skillscard/${cat}`
                   ? "bg-indigo-600 text-white border-indigo-600 shadow-md"
                   : "hover:bg-indigo-600 hover:text-white border-indigo-200 dark:border-indigo-700"
               }`}

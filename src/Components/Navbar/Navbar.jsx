@@ -3,6 +3,7 @@ import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router";
 import logo from '../../assets/skill.png'
+import user from '../../assets/user-icon.png'
 
 const Navbar = () => {
     const [isOpen,setIsOpen] = useState(false);
@@ -44,10 +45,11 @@ const Navbar = () => {
       </div>
       {/* left button */}
       <div className="hidden md:flex flex-none gap-2">
-        <Link to={"/signup"}>
+        <img className="w-12 rounded-full" src={user} alt="" />
+        <Link to={"/auth/signup"}>
           <button className="btn btn-primary btn-sm">Sign Up</button>
         </Link>
-        <Link to={"/singin"}>
+        <Link to={"/auth/signin"}>
           <button className="btn btn-outline btn-sm">Sign In</button>
         </Link>
       </div>
