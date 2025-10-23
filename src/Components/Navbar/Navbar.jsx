@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router";
 import logo from '../../assets/skill.png'
-import user from '../../assets/user-icon.png'
+import userImg from '../../assets/user-icon.png'
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const {user,logOut} = use(AuthContext)
     const [isOpen,setIsOpen] = useState(false);
     const toggleMenu = () =>{
         setIsOpen(!isOpen);
     }
+    const handleLogout = ()=>{
+      console.log('user tryign to logout')
+      logOut()
+      .then(()=>{
+        alert('You logged out successfully')
+      })
+      .catch(()=>{
+        console.error('Error occur logged out');
+      })
+
+    }
   return (
     <nav className="navbar bg-white/10 backdrop-blur-md border-b border-white/20 shadow-lg px-6 rounded-2xl mx-4 mt-3 transition-all duration-300 hover:bg-white/20">
-
       {/* Brand name */}
       <div className="flex items-center">
         <div>
@@ -22,6 +34,7 @@ const Navbar = () => {
           Skill<span className="text-secondary">Exchange</span>
           <span>Swap</span>
         </Link>
+        <div>{user && user.email}</div>
       </div>
       {/* Menu  */}
       <div className="hidden md:flex flex-1 justify-center">
@@ -32,12 +45,18 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/auth/aboutus"} className="hover:text-primary font-medium">
+            <Link
+              to={"/auth/aboutus"}
+              className="hover:text-primary font-medium"
+            >
               About
             </Link>
           </li>
           <li>
-            <Link to={"/auth/profile"} className="hover:text-primary font-medium">
+            <Link
+              to={"/auth/profile"}
+              className="hover:text-primary font-medium"
+            >
               Profile
             </Link>
           </li>
@@ -45,13 +64,23 @@ const Navbar = () => {
       </div>
       {/* left button */}
       <div className="hidden md:flex flex-none gap-2">
-        <img className="w-12 rounded-full" src={user} alt="" />
-        <Link to={"/auth/signup"}>
-          <button className="btn btn-primary btn-sm">Sign Up</button>
-        </Link>
-        <Link to={"/auth/signin"}>
+        <img className="w-12 rounded-full" src={userImg} alt="" />
+        {user ? (
+          <Link onClick={toggleMenu} to={"/auth/signup"}>
+            <button onClick={handleLogout} className="btn btn-primary w-full">
+              Log Out
+            </button>
+          </Link>
+        ) : (
+          <Link onClick={toggleMenu} to={"/auth/signin"}>
+            <button onClick={handleLogout} className="btn btn-primary w-full">
+              Log In
+            </button>
+          </Link>
+        )}
+        {/* <Link to={"/auth/signin"}>
           <button className="btn btn-outline btn-sm">Sign In</button>
-        </Link>
+        </Link> */}
       </div>
       {/* Mobile res */}
       <div className="md:hidden flex-none">
@@ -82,15 +111,19 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link onClick={toggleMenu} to={"/signup"}>
-                <button className="btn btn-primary w-full">Sign Up</button>
-              </Link>
+              {user ? (
+                <Link onClick={toggleMenu} to={"/signup"}>
+                  <button className="btn btn-primary w-full">Sign Up</button>
+                </Link>
+              ) : (
+                ""
+              )}
             </li>
-            <li>
+            {/* <li>
               <Link onClick={toggleMenu} to={"/signin"}>
                 <button className="btn btn-outline w-full">Sign In</button>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}

@@ -1,9 +1,26 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
  
 
 const SignIn = () => {
-  const handleSign = () => {};
+    const {signIn} = use(AuthContext)
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({email,password})
+    signIn(email,password)
+    .then((res)=>{
+        const user = res.user;
+        console.log(user)
+    })
+    .catch((error)=>{
+        const errorCode = error.code;
+        alert(errorCode);
+    })
+  };
   return (
     <div className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -24,7 +41,7 @@ const SignIn = () => {
           </div>
           {/* Login session */}
           <div className="w-full max-w-md backdrop-blur-lg bg-white/10 shadow-2xl rounded-2xl p-8">
-            <form onSubmit={handleSign} className="space-y-5">
+            <form onSubmit={handleSignIn} className="space-y-5">
               <h2 className="text-2xl font-semibold mb-2 text-center text-white">
                 Sign in
               </h2>

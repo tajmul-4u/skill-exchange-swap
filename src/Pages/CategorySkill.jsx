@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const CategorySkill = () => {
   const [skills, setSkills] = useState([]);
@@ -9,7 +10,6 @@ const CategorySkill = () => {
       .then((data) => setSkills(data))
       .catch((err) => console.error("Error loading skills:", err));
   }, []);
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -51,9 +51,11 @@ const CategorySkill = () => {
                 </p>
 
                 {/* Button */}
-                <button className="mt-4 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-2 rounded-xl font-semibold hover:opacity-90 transition">
-                  View Details
-                </button>
+                <Link to={`/skill-details/${skill.skillId}`}>
+                  <button className="mt-4 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-2 rounded-xl font-semibold hover:opacity-90 transition">
+                    View Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))

@@ -1,7 +1,30 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { Link } from "react-router";
  
 
 const SignUp = () => {
+    const {createUser,setUser} = use(AuthContext)
+ const handleRegister = (e)=>{
+e.preventDefault();
+// console.log(e.target)
+const from = e.target;
+const name = from.name.value;
+const photo = from.photo.value;
+const email = from.email.value;
+const password = from.password.value;
+// console.log({name,photo,email,password})
+ createUser(email,password)
+ .then((res)=>{
+    const user = res.user;
+    setUser(user);
+    console.log(user);
+ })
+ .catch((error)=>{
+    const errorMessage = error.messsage;
+    console.log(errorMessage);
+ })
+ }
  
   return (
     <div className="min-h-[96vh] flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 relative overflow-hidden">
@@ -25,7 +48,7 @@ const SignUp = () => {
             <h2 className="text-2xl font-semibold mb-6 text-center text-white">
               Sign Up
             </h2>
-            <form onSubmit={``} className="space-y-5">
+            <form onSubmit={handleRegister} className="space-y-5">
               <div>
                 <label>Name</label>
                 <input
@@ -79,12 +102,12 @@ const SignUp = () => {
               <div className="text-center mt-3">
                 <p className="text-sm text-white/80">
                   Already have an account?{" "}
-                  {/* <Link
-                    to="/signin"
+                  <Link
+                    to="/auth/signin"
                     className="text-pink-300 hover:text-white font-medium underline"
                   >
                     Sign in
-                  </Link> */}
+                  </Link>
                 </p>
               </div>
             </form>

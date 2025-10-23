@@ -8,6 +8,8 @@ import AuthLayout from "../Layouts/AuthLayout";
 import AboutUs from "../Pages/AboutUs";
 import Profile from "../Pages/Profile";
 import CategoryBar from "../Components/CategoryBar";
+import SkillDetails from "../Components/SkillCards/SkillDetails";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,16 @@ const router = createBrowserRouter([
         Component: Profile,
       },
     ],
+  },
+
+  {
+    path: "/skill-details/:skillId",
+    element: (
+      <PrivateRoute>
+        <SkillDetails></SkillDetails>
+      </PrivateRoute>
+    ),
+    loader: () => fetch("/skill.json"),
   },
 
   { path: "*", element: <p>404 Not Found</p> },
