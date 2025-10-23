@@ -5,6 +5,7 @@ import { Outlet } from 'react-router';
 import Footer from '../Components/Footer/Footer';
 import CategoryBar from '../Components/CategoryBar';
 import TopRatedProviders from '../Components/TopRatedProvider/TopRatedProviders';
+import CategorySkill from '../Pages/CategorySkill';
 
 const HomeLayout = () => {
     return (
@@ -25,6 +26,7 @@ const HomeLayout = () => {
         </header>
         <section>
           <Hero></Hero>
+          <CategorySkill></CategorySkill>
         </section>
         <main>
           <Outlet></Outlet>

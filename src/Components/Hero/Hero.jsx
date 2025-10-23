@@ -58,45 +58,6 @@ const Hero = () => {
           </div>
         </SwiperSlide>
       ))}
-      {/* Example slides */}
-      {/* <SwiperSlide>
-        <div className="relative h-[70vh] flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-3">Grow Your Skills</h1>
-            <p className="mb-5">
-              Find mentors and learners who share your passion.
-            </p>
-            <button className="btn btn-primary">Join Now</button>
-          </div>
-        </div>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <div className="relative h-[70vh] flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-3">
-              Skill Swapping Made Easy
-            </h1>
-            <p className="mb-5">
-              Exchange your expertise with others and learn new skills.
-            </p>
-            <button className="btn btn-secondary">Explore Skills</button>
-          </div>
-        </div>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <div className="relative h-[70vh] flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-3">Build Your Network</h1>
-            <p className="mb-5">
-              Collaborate, connect, and grow your potential.
-            </p>
-            <button className="btn btn-accent">Start Learning</button>
-          </div>
-        </div>
-      </SwiperSlide> */}
-
       {/* Autoplay Progress Indicator */}
       <div className="autoplay-progress" slot="container-end">
         <svg viewBox="0 0 48 48" ref={progressCircle}>
