@@ -10,6 +10,7 @@ import Profile from "../Pages/Profile";
 import CategoryBar from "../Components/CategoryBar";
 import SkillDetails from "../Components/SkillCards/SkillDetails";
 import PrivateRoute from "../Provider/PrivateRoute";
+import ForgotPassword from "../Pages/FotgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/auth/signin",
         Component: SignIn,
+      },
+      {
+        path:'/auth/forgotpass',
+        Component:ForgotPassword
       },
       {
         path: "/auth/aboutus",

@@ -41,7 +41,7 @@ const Profile = () => {
             ✏️ Update Profile
           </button>
         ) : (
-          <form onSubmit={handleUpdate} className="mt-6 space-y-4">
+          <form onSubmit={handleUpdate} className="mt-6 space-y-4 text-teal-500">
             <input
               type="text"
               placeholder="New Name"
