@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import { Link, Navigate, useLoaderData, useParams } from "react-router";
-
+import { Link, useLoaderData, useParams } from "react-router";
+ 
 const SkillDetails = () => {
   const data = useLoaderData();
   const { skillId } = useParams(); // ✅ match route param name
   const [skillDetails, setSkillDetails] = useState(null);
+
 
   console.log("Params:", skillId);
   console.log("Data from loader:", data);

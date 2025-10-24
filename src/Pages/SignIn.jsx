@@ -1,10 +1,14 @@
-import React, { use } from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
  
 
 const SignIn = () => {
+  const [error,setError]=useState('')
     const {signIn} = use(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location)
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,10 +19,12 @@ const SignIn = () => {
     .then((res)=>{
         const user = res.user;
         console.log(user)
+        navigate(`${location.state? location.state : '/'}`)
     })
     .catch((error)=>{
         const errorCode = error.code;
-        alert(errorCode);
+        // alert(errorCode);
+        setError(errorCode);
     })
   };
   return (
@@ -51,6 +57,7 @@ const SignIn = () => {
                   type="email"
                   name="email"
                   placeholder="example@gmail.com"
+                  required
                   className="input input-bordered w-full bg-white/20 text-white placeholder-white/60 focus:ring-2 focus:ring-blue-400"
                 />
               </div>
@@ -60,9 +67,13 @@ const SignIn = () => {
                   type="password"
                   name="password"
                   placeholder="*********"
+                  required
                   className="input input-bordered w-full bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
+              {
+                error && <p className="text-red-500 text-sm">{error}</p>
+              }
               <button className="hover:underline cursor-pointer">
                 Forgot Password?
               </button>

@@ -64,7 +64,7 @@ const Navbar = () => {
       </div>
       {/* left button */}
       <div className="hidden md:flex flex-none gap-2">
-        <img className="w-12 rounded-full" src={userImg} alt="" />
+        <img className="w-12 rounded-full" src={`${user ? user.photoURL : userImg}`} alt="" />
         {user ? (
           <Link onClick={toggleMenu} to={"/auth/signup"}>
             <button onClick={handleLogout} className="btn btn-primary w-full">
