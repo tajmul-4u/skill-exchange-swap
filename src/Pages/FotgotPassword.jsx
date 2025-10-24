@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     try {
       await resetPassword(email);
       toast(" Password reset email sent!");
-      window.location.href = "https://mail.google.com"; // Redirect to Gmail
+      window.location.href = "https://mail.google.com"; 
     } catch (error) {
       toast(" Failed to send reset email");
       console.error(error);

@@ -5,17 +5,17 @@ import { Link, useLoaderData, useParams } from "react-router";
  
 const SkillDetails = () => {
   const data = useLoaderData();
-  const { skillId } = useParams(); // ✅ match route param name
+  const { skillId } = useParams();  
   const [skillDetails, setSkillDetails] = useState(null);
 
 
-  console.log("Params:", skillId);
-  console.log("Data from loader:", data);
+  // console.log("Params:", skillId);
+  // console.log("Data from loader:", data);
 
   useEffect(() => {
     if (data && skillId) {
       const found = data.find(
-        (item) => item.skillId == skillId // ✅ use skillId and loose equality to match string vs number
+        (item) => item.skillId == skillId  
       );
       setSkillDetails(found);
     }

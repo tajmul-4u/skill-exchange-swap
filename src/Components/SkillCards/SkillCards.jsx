@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLoaderData } from "react-router";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
+import { FaStar } from "react-icons/fa";
 
 const SkillCards = () => {
   const { skills } = useLoaderData();  
@@ -43,7 +44,9 @@ const SkillCards = () => {
                     {skill.skillName}
                   </h2>
                   <div className="flex items-center text-yellow-500 text-sm font-medium">
-                    {"⭐".repeat(Math.round(skill.rating))}
+                    {[...Array(Math.round(skill.rating))].map((_, index) => (
+                      <FaStar key={index} />
+                    ))}{" "}
                     <span className="ml-2 text-gray-500 dark:text-gray-400">
                       ({skill.rating.toFixed(1)})
                     </span>
