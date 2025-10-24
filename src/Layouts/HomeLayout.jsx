@@ -6,7 +6,7 @@ import Footer from '../Components/Footer/Footer';
 import CategoryBar from '../Components/CategoryBar';
 import TopRatedProviders from '../Components/TopRatedProvider/TopRatedProviders';
 import CategorySkill from '../Pages/CategorySkill';
-
+ 
 const HomeLayout = () => {
     return (
       <div>

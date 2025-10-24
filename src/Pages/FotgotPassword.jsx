@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { useLocation } from "react-router";
+import { toast } from "react-toastify";
 
 const ForgotPassword = () => {
   const { resetPassword } = useContext(AuthContext);
@@ -12,10 +13,10 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       await resetPassword(email);
-      alert("✅ Password reset email sent!");
+      toast(" Password reset email sent!");
       window.location.href = "https://mail.google.com"; // Redirect to Gmail
     } catch (error) {
-      alert("❌ Failed to send reset email");
+      toast(" Failed to send reset email");
       console.error(error);
     }
   };

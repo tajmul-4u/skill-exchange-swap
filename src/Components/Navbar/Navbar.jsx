@@ -1,129 +1,148 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router";
 import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router";
-import logo from '../../assets/skill.png'
-import userImg from '../../assets/user-icon.png'
 import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import logo from "../../assets/skill.png";
+import userImg from "../../assets/user-icon.png";
 
 const Navbar = () => {
-  const {user,logOut} = use(AuthContext)
-    const [isOpen,setIsOpen] = useState(false);
-    const toggleMenu = () =>{
-        setIsOpen(!isOpen);
-    }
-    const handleLogout = ()=>{
-      console.log('user tryign to logout')
-      logOut()
-      .then(()=>{
-        alert('You logged out successfully')
-      })
-      .catch(()=>{
-        console.error('Error occur logged out');
-      })
+  const { user, logOut } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
 
-    }
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => toast("You logged out successfully"))
+      .catch(() => console.error("Error during logout"));
+  };
+
   return (
-    <nav className="navbar bg-white/10 backdrop-blur-md border-b border-white/20 shadow-lg px-6 rounded-2xl mx-4 mt-3 transition-all duration-300 hover:bg-white/20">
-      {/* Brand name */}
-      <div className="flex items-center">
-        <div>
-          <img className="w-25 bg-base-100" src={logo} alt="logo" />
+    <nav className="sticky top-0 z-50 bg-white/20 backdrop-blur-md border-b border-white/30 shadow-lg transition-all duration-300">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+        {/* Brand Logo + Name */}
+        <div className="flex items-center space-x-3">
+          <img src={logo} alt="logo" className="w-12 h-12 object-contain" />
+          <Link
+            to="/"
+            className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+          >
+            SkillExchange<span className="text-indigo-600">Swap</span>
+          </Link>
         </div>
-        <Link to={"/"} className="text-2xl font-bold text-primary">
-          Skill<span className="text-secondary">Exchange</span>
-          <span>Swap</span>
-        </Link>
-        <div>{user && user.email}</div>
-      </div>
-      {/* Menu  */}
-      <div className="hidden md:flex flex-1 justify-center">
-        <ul className="menu menu-horizontal px-1 space-x-4 text-xl font-semibold">
-          <li>
-            <Link to={"/"} className="hover:text-primary font-medium">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/auth/aboutus"}
-              className="hover:text-primary font-medium"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/auth/profile"}
-              className="hover:text-primary font-medium"
-            >
-              Profile
-            </Link>
-          </li>
-        </ul>
-      </div>
-      {/* left button */}
-      <div className="hidden md:flex flex-none gap-2">
-        <img className="w-12 rounded-full" src={`${user ? user.photoURL : userImg}`} alt="" />
-        {user ? (
-          <Link onClick={toggleMenu} to={"/auth/signup"}>
-            <button onClick={handleLogout} className="btn btn-primary w-full">
-              Log Out
-            </button>
-          </Link>
-        ) : (
-          <Link onClick={toggleMenu} to={"/auth/signin"}>
-            <button onClick={handleLogout} className="btn btn-primary w-full">
-              Log In
-            </button>
-          </Link>
-        )}
-        {/* <Link to={"/auth/signin"}>
-          <button className="btn btn-outline btn-sm">Sign In</button>
-        </Link> */}
-      </div>
-      {/* Mobile res */}
-      <div className="md:hidden flex-none">
-        <button
-          onClick={toggleMenu}
-          className="btn btn-ghost btn-circle text-xl"
-        >
-          {isOpen ? <RxCross2 /> : <LuMenu></LuMenu>}
-        </button>
-      </div>
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-base-100 shadow-md border-t z-50 md:hidden">
-          <ul className="menu p-4 space-y-2">
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          <ul className="flex space-x-6 text-lg font-medium text-white">
             <li>
-              <Link to={"/"} onClick={toggleMenu}>
+              <Link to="/" className="hover:text-indigo-600 transition">
                 Home
               </Link>
             </li>
             <li>
-              <Link to={"/"} onClick={toggleMenu}>
+              <Link
+                to="/auth/aboutus"
+                className="hover:text-indigo-600 transition"
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link to={"/"} onClick={toggleMenu}>
+              <Link
+                to="/auth/profile"
+                className="hover:text-indigo-600 transition"
+              >
                 Profile
               </Link>
             </li>
-            <li>
-              {user ? (
-                <Link onClick={toggleMenu} to={"/signup"}>
-                  <button className="btn btn-primary w-full">Sign Up</button>
-                </Link>
-              ) : (
-                ""
-              )}
-            </li>
-            {/* <li>
-              <Link onClick={toggleMenu} to={"/signin"}>
-                <button className="btn btn-outline w-full">Sign In</button>
+          </ul>
+
+          {/* User Section */}
+          <div className="flex items-center space-x-4">
+            <img
+              src={user?.photoURL || userImg}
+              alt="User"
+              className="w-10 h-10 rounded-full border-2 border-indigo-500"
+            />
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-full font-semibold hover:scale-105 transition-transform"
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link
+                to="/auth/signin"
+                className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full font-semibold hover:scale-105 transition-transform"
+              >
+                Log In
               </Link>
-            </li> */}
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden text-3xl text-indigo-600 focus:outline-none"
+        >
+          {isOpen ? <RxCross2 /> : <LuMenu />}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown */}
+      {isOpen && (
+        <div className="md:hidden bg-white/80 backdrop-blur-md border-t border-indigo-100 shadow-lg animate-slide-down">
+          <ul className="flex flex-col items-center py-4 space-y-4 font-medium text-gray-700">
+            <li>
+              <Link
+                to="/"
+                onClick={toggleMenu}
+                className="hover:text-indigo-600"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/auth/aboutus"
+                onClick={toggleMenu}
+                className="hover:text-indigo-600"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/auth/profile"
+                onClick={toggleMenu}
+                className="hover:text-indigo-600"
+              >
+                Profile
+              </Link>
+            </li>
+            {user ? (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  toggleMenu();
+                }}
+                className="px-5 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-full font-semibold"
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link
+                to="/auth/signin"
+                onClick={toggleMenu}
+                className="px-5 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full font-semibold"
+              >
+                Log In
+              </Link>
+            )}
           </ul>
         </div>
       )}

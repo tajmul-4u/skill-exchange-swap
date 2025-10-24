@@ -1,13 +1,17 @@
 import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import { toast } from "react-toastify";
  
 
 const SignIn = () => {
-  const [error,setError]=useState('')
+   const [error,setError]=useState('')
     const {signIn} = use(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
+    const [show,setShow]=useState('')
     console.log(location)
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -19,14 +23,19 @@ const SignIn = () => {
     .then((res)=>{
         const user = res.user;
         console.log(user)
+        toast('Sign In successfull')
         navigate(`${location.state? location.state : '/'}`)
     })
     .catch((error)=>{
         const errorCode = error.code;
         // alert(errorCode);
+        toast.error(error.message);
         setError(errorCode);
     })
   };
+  
+    
+  }
   return (
     <div className="min-h-[calc(100vh-20px)] flex items-center justify-center bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -64,12 +73,18 @@ const SignIn = () => {
             <div className="relative">
               <label className="block text-sm mb-1">Password</label>
               <input
-                type="password"
+                type={show ? 'text' : 'password'}
                 name="password"
                 placeholder="*********"
                 required
                 className="input input-bordered w-full bg-white/20 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
+              <span onClick={()=>setShow(!show)}
+                className="absolute right-[8px] top-[36px] cursor-pointer z-50">
+                {
+                  show ? <FaEye></FaEye> : <IoEyeOff></IoEyeOff>
+                }
+              </span>
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <Link

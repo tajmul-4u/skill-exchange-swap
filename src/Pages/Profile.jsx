@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
  
 const Profile = () => {
-  const { user, updateUserProfile } = useContext(AuthContext)
+  const { user, updateUser } = useContext(AuthContext)
   const [editMode, setEditMode] = useState(false);
   const [name, setName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
@@ -10,12 +11,12 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await updateUserProfile(name, photoURL);
-      alert("✅ Profile updated successfully!");
+      await updateUser(name, photoURL);
+      toast("Profile updated successfully!");
       setEditMode(false);
       window.location.reload();
     } catch (err) {
-      alert("❌ Error updating profile!");
+      toast(" Error updating profile!");
       console.error(err);
     }
   };
@@ -38,7 +39,7 @@ const Profile = () => {
             onClick={() => setEditMode(true)}
             className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
           >
-            ✏️ Update Profile
+             Update Profile
           </button>
         ) : (
           <form onSubmit={handleUpdate} className="mt-6 space-y-4 text-teal-500">
