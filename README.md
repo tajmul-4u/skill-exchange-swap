@@ -1,16 +1,11 @@
-# React + Vite
+### OverView The application:
+The Skill Exchange Swap the share skill and learn the skill every where.
+Pick the point and future develop the technology and extra caricular activites to develop our mind. Society and the world change the rapidly for newly technology.If we are not adapt the technology we are fall down back .So in this criterian the differnent moddern technology and the skill show and learn this platform that is increased our society and world as well as our mind.
+So we keep learn and share the skill in this website.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Developed: Technology Stack:
+This application build up the React based and style for tailwindcss and design the daisyUI components and the 
+,dynamic animation the Swiper and the error show and success the react toastify .
+Firebase Authentication system include for password authentication.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Live Link : https://skill-exchange-swap.web.app/
